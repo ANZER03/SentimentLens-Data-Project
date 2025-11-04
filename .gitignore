@@ -42,3 +42,5 @@ derby.log
 .vscode/
 *.iml
 .DS_Store
+docker/volumes/*
+docker/jars/*
