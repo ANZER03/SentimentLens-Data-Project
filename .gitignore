@@ -46,3 +46,8 @@ docker/volumes/*
 docker/jars/*
 docker/minio-data/*
 docker/minio-data/.minio.sys/
+data/
+minio/
+jars/
+logs/
+docker/airflow/logs/
