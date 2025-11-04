@@ -3,4 +3,42 @@ Data/Traffic_Volume_Counts_20251103.csv
 Data/*.dat
 Data/*.zip
 Data/ml-1m
+PRD.md
+Plan.md
 
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+env/
+venv/
+.venv/
+pip-log.txt
+pip-delete-this-directory.txt
+.tox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Spark
+spark-warehouse/
+metastore_db/
+derby.log
+
+# Docker
+*.log
+*.tmp
+
+# IDEs
+.idea/
+.vscode/
+*.iml
+.DS_Store

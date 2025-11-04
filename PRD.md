@@ -73,7 +73,7 @@ Key Features:
 - Metrics: Accuracy for sentiment; precision/recall for recs.
 
 ### 4.5 Orchestration and CI/CD
-- Airflow: DAGs for ingestion (including .dat loading), ETL, training, inference (e.g., daily retrain, hourly process).
+- Airflow: DAGs for ingestion (including .dat loading), ETL, training, inference (e.g., daily retrain, hourly process). Uses SQLite as its metadata store for simplicity in this project's scope.
 - Jenkins: Automate builds, tests, deployments (e.g., Docker image pushes, K8s applies).
 
 ### 4.6 Deployment
