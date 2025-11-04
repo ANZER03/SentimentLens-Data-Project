@@ -44,3 +44,5 @@ derby.log
 .DS_Store
 docker/volumes/*
 docker/jars/*
+docker/minio-data/*
+docker/minio-data/.minio.sys/

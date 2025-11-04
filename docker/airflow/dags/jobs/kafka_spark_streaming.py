@@ -56,13 +56,12 @@
 # if __name__ == "__main__":
 #     start_kafka_streaming_job()
 
-
 from pyspark.sql import SparkSession
 from pyspark.sql.functions import col
 
 def create_spark_session(app_name="KafkaSparkStreaming", master="spark://spark-master:7077"):
     """
-    Creates and configures a SparkSession for Kafka streaming with Iceberg + MinIO.
+    SparkSession for Kafka streaming into Iceberg on MinIO using Hadoop S3A.
     """
     spark = (
         SparkSession.builder
@@ -70,16 +69,16 @@ def create_spark_session(app_name="KafkaSparkStreaming", master="spark://spark-m
         .master(master)
         # Kafka connector
         .config("spark.jars.packages", "org.apache.spark:spark-sql-kafka-0-10_2.12:3.5.1")
-        # Iceberg catalog config
+        # Iceberg Hadoop catalog pointing to MinIO via s3a
         .config("spark.sql.catalog.local", "org.apache.iceberg.spark.SparkCatalog")
         .config("spark.sql.catalog.local.type", "hadoop")
-        .config("spark.sql.catalog.local.warehouse", "s3://warehouse/")
-        # MinIO S3 settings
-        .config("spark.sql.catalog.local.io-impl", "org.apache.iceberg.aws.s3.S3FileIO")
-        .config("spark.sql.catalog.local.s3.endpoint", "http://minio:9000")
-        .config("spark.sql.catalog.local.s3.access-key-id", "minio")
-        .config("spark.sql.catalog.local.s3.secret-access-key", "minio123")
-        .config("spark.sql.catalog.local.s3.path-style-access", "true")
+        .config("spark.sql.catalog.local.warehouse", "s3a://warehouse/")
+        # Hadoop S3A configs for MinIO
+        .config("spark.hadoop.fs.s3a.endpoint", "http://minio:9000")
+        .config("spark.hadoop.fs.s3a.access.key", "minio")
+        .config("spark.hadoop.fs.s3a.secret.key", "minio123")
+        .config("spark.hadoop.fs.s3a.path.style.access", "true")
+        .config("spark.hadoop.fs.s3a.connection.ssl.enabled", "false")
         # Checkpointing for streaming
         .config("spark.sql.streaming.checkpointLocation", "/tmp/spark-checkpoints")
         .getOrCreate()
@@ -89,6 +88,16 @@ def create_spark_session(app_name="KafkaSparkStreaming", master="spark://spark-m
 
 def start_kafka_streaming_job():
     spark = create_spark_session()
+
+    # Create the Iceberg table if it doesn’t exist
+    spark.sql("""
+    CREATE TABLE IF NOT EXISTS local.db.vehicle_positions (
+        key STRING,
+        value STRING,
+        timestamp TIMESTAMP
+    )
+    USING iceberg
+    """)
 
     # Read from Kafka topic
     kafka_df = (
@@ -112,8 +121,7 @@ def start_kafka_streaming_job():
         processed_df.writeStream
         .format("iceberg")
         .outputMode("append")
-        .option("path", "local.db.vehicle_positions")  # Iceberg table identifier
-        .start()
+        .toTable("local.db.vehicle_positions")
     )
 
     query.awaitTermination()
@@ -121,3 +129,4 @@ def start_kafka_streaming_job():
 
 if __name__ == "__main__":
     start_kafka_streaming_job()
+
