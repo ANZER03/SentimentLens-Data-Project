@@ -12,7 +12,7 @@ services:
       - "7077:7077"
       - "8082:8080"
     volumes:
-      - ./airflow/dags/jobs:/opt/airflow/dags/jobs
+      - ../src/streaming:/opt/bitnami/spark/spark-jobs-streaming
     
   spark-worker:
     image: spark-iceberg:latest
@@ -27,7 +27,7 @@ services:
     ports:
       - "8081:8081"
     volumes:
-      - ./airflow/dags/jobs:/opt/airflow/dags/jobs
+      - ../src/streaming:/opt/bitnami/spark/spark-jobs-streaming
 
   minio:
     image: minio/minio:latest
@@ -58,7 +58,7 @@ services:
       - MINIO_ACCESS_KEY=${MINIO_ACCESS_KEY}
       - MINIO_SECRET_KEY=${MINIO_SECRET_KEY}
     volumes:
-      - ./airflow/dags:/opt/airflow/dags
+      - ../airflow/dags:/opt/airflow/dags
       - ./airflow/logs:/opt/airflow/logs
       - ./airflow/plugins:/opt/airflow/plugins
       - ./airflow/data:/opt/airflow/data
