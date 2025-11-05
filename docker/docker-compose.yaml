@@ -59,6 +59,7 @@ services:
       - ./airflow/logs:/opt/airflow/logs
       - ./airflow/plugins:/opt/airflow/plugins
       - ./airflow/data:/opt/airflow/data
+      - ../Data/ml-1m:/opt/airflow/project_data
       - //var/run/docker.sock:/var/run/docker.sock
 
   zookeeper:

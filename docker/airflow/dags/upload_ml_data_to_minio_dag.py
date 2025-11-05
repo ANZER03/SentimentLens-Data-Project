@@ -28,7 +28,7 @@ with DAG(
 
     # Define the base path to the data files relative to the DAGs folder
     # This assumes the 'Data' folder is at the project root level
-    base_data_path = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', 'Data', 'ml-1m'))
+    base_data_path = "/opt/airflow/project_data/ml-1m"
 
     upload_movies_task = PythonOperator(
         task_id='upload_movies_dat',
