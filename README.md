@@ -89,3 +89,5 @@ make format
 ## Documentation
 
 Refer to the `docs/` directory for detailed architecture, setup, and development guides.
+
+![Architecture Diagram](images/diagram-export-11-5-2025-11_33_14-PM.png)
