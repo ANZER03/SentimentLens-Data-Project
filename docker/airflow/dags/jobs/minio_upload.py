@@ -60,10 +60,11 @@ def upload_file_to_minio(file_path, bucket_name, object_name=None):
 if __name__ == "__main__":
     # Example usage (for testing purposes)
     # These would typically be passed as arguments in an Airflow DAG
-    test_file_path = "/path/to/your/local/file.txt" # Replace with a dummy file for local testing
+    test_file_path = "docker/airflow/dags/jobs/wordcount.py" # Replace with a dummy file for local testing
     test_bucket_name = "test-bucket"
-    test_object_name = "test-file.txt"
+    test_object_name = "wordcount.py"
 
+    print(f"Uploading file '{test_file_path}' to '{test_bucket_name}/{test_object_name}'")
     if os.path.exists(test_file_path):
         upload_file_to_minio(test_file_path, test_bucket_name, test_object_name)
     else:
