@@ -87,6 +87,28 @@ services:
       KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
 
+  postgres:
+    image: bitnami/postgresql:latest
+    container_name: postgres
+    environment:
+      - POSTGRESQL_USERNAME=iceberg
+      - POSTGRESQL_PASSWORD=iceberg
+      - POSTGRESQL_DATABASE=iceberg_catalog
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./postgres/data:/bitnami/postgresql
+
+  trino:
+    image: trinodb/trino:latest
+    container_name: trino
+    ports:
+      - "8086:8080"
+    volumes:
+      - ./trino/etc:/etc/trino
+    depends_on:
+      - postgres
+      - minio      
 networks:
   default:
     driver: bridge
