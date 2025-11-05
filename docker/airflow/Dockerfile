@@ -3,6 +3,8 @@ FROM apache/airflow:latest
 # Install Spark provider
 RUN pip install --no-cache-dir apache-airflow-providers-apache-spark
 
+RUN pip install --no-cache-dir boto3
+
 USER root
 
 # Install OpenJDK 17
