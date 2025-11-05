@@ -3,6 +3,9 @@ import os
 import logging
 import boto3
 from botocore.exceptions import ClientError
+from dotenv import load_dotenv
+
+load_dotenv()
 
 # Configure logging
 logging.basicConfig(level=logging.INFO)
@@ -60,11 +63,6 @@ if __name__ == "__main__":
     test_file_path = "/path/to/your/local/file.txt" # Replace with a dummy file for local testing
     test_bucket_name = "test-bucket"
     test_object_name = "test-file.txt"
-
-    # Set dummy environment variables for local testing if not already set
-    os.environ["MINIO_ENDPOINT"] = os.getenv("MINIO_ENDPOINT", "http://localhost:9000")
-    os.environ["MINIO_ACCESS_KEY"] = os.getenv("MINIO_ACCESS_KEY", "minioadmin")
-    os.environ["MINIO_SECRET_KEY"] = os.getenv("MINIO_SECRET_KEY", "minioadmin")
 
     if os.path.exists(test_file_path):
         upload_file_to_minio(test_file_path, test_bucket_name, test_object_name)

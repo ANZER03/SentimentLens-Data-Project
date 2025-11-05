@@ -5,6 +5,7 @@ Data/*.zip
 Data/ml-1m
 PRD.md
 Plan.md
+.env
 
 # Python
 __pycache__/
