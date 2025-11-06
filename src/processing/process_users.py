@@ -1,4 +1,5 @@
 from pyspark.sql import SparkSession
+from pyspark.sql.types import StructType, StructField, StringType, IntegerType
 
 import sys
 import os
@@ -11,15 +12,19 @@ def process_users_data(spark: SparkSession):
     """
     Reads user data from Minio, processes it, and writes it to an Iceberg table.
     """
-    # Read data from Minio
-    users_df = spark.read.format("csv").option("delimiter", "::").load("s3a://raw-data/users.dat")
+    schema = StructType([
+        StructField("user_id", IntegerType(), True),
+        StructField("gender", StringType(), True),
+        StructField("age", IntegerType(), True),
+        StructField("occupation", IntegerType(), True),
+        StructField("zip_code", StringType(), True)
+    ])
 
-    # Rename columns
-    users_df = users_df.withColumnRenamed("_c0", "user_id") \
-                       .withColumnRenamed("_c1", "gender") \
-                       .withColumnRenamed("_c2", "age") \
-                       .withColumnRenamed("_c3", "occupation") \
-                       .withColumnRenamed("_c4", "zip_code")
+    # Read data from Minio
+    users_df = spark.read.format("csv") \
+        .option("delimiter", "::") \
+        .schema(schema) \
+        .load("s3a://raw-data/users.dat")
 
     # Write data to Iceberg
     users_df.write.mode("overwrite").saveAsTable("iceberg.silver_layer.users")
