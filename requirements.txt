@@ -10,3 +10,4 @@ pandas==2.2.0
 apache-airflow==2.8.1
 apache-airflow-providers-sqlite==3.4.0
 python-dotenv==1.0.1
+minio

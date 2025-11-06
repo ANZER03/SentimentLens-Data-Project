@@ -12,7 +12,7 @@ services:
       - "7077:7077"
       - "8082:8080"
     volumes:
-      - ../src/streaming:/opt/bitnami/spark/spark-jobs-streaming
+      - ../src:/opt/bitnami/spark/spark-jobs
     
   spark-worker:
     image: spark-iceberg:latest
@@ -27,7 +27,7 @@ services:
     ports:
       - "8081:8081"
     volumes:
-      - ../src/streaming:/opt/bitnami/spark/spark-jobs-streaming
+      - ../src:/opt/bitnami/spark/spark-jobs
 
   minio:
     image: minio/minio:latest
