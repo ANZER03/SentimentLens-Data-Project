@@ -22,7 +22,7 @@ def create_spark_session(app_name="MovieLensLakehouse", config=None):
 
     spark_builder = (
         SparkSession.builder.appName(app_name)
-        .config("spark.jars.packages", "org.apache.iceberg:iceberg-spark-runtime-3.5_2.12:1.4.2,org.postgresql:postgresql:42.5.4")
+        .config("spark.jars.packages", "org.apache.iceberg:iceberg-spark-runtime-3.5_2.12:1.4.2,org.postgresql:postgresql:42.5.4,org.apache.spark:spark-sql-kafka-0-10_2.12:3.5.1")
         .config("spark.sql.extensions", "org.apache.iceberg.spark.extensions.IcebergSparkSessionExtensions")
         .config("spark.sql.catalog.iceberg", "org.apache.iceberg.spark.SparkCatalog")
         .config("spark.sql.catalog.iceberg.type", "jdbc")
@@ -35,7 +35,7 @@ def create_spark_session(app_name="MovieLensLakehouse", config=None):
         .config("spark.hadoop.fs.s3a.secret.key", "minio123")
         .config("spark.hadoop.fs.s3a.path.style.access", "true")
         .config("spark.hadoop.fs.s3a.connection.ssl.enabled", "false")
-        .config("spark.hadoop.fs.s3a.impl", "org.apache.hadoop.fs.s3a.S3AFileSystem")
+        # .config("spark.hadoop.fs.s3a.impl", "org.apache.hadoop.fs.s3a.S3AFileSystem")
         .config("spark.sql.defaultCatalog", "iceberg")
         .config("spark.sql.streaming.checkpointLocation", "/tmp/spark-checkpoints")
 
