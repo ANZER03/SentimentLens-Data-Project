@@ -1,6 +1,6 @@
 # MovieLens LakeHouse Pipeline
 
-![Architecture Diagram](images/diagram-export-11-5-2025-11_33_14-PM.png)
+![Architecture Diagram](images/diagram.png)
 
 This project implements a MovieLens LakeHouse pipeline demonstrating modern data engineering practices.
 
@@ -37,7 +37,8 @@ The project follows a multi-layered data lakehouse architecture, processing data
 
 ## Streamlit App Demo
 
-[A video demonstrating the Streamlit application will be available here.]
+[![Watch the demo](images/thumbnail.png)](images/demo.mp4)
+
 
 ---
 
