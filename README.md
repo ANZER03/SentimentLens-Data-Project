@@ -51,7 +51,7 @@ The project follows a multi-layered data lakehouse architecture, processing data
 
     ```bash
     git clone <repository_url>
-    cd "MovieLens"
+    cd "MovieLens-Data-Project"
     ```
 
 3.  **Environment Variables**:
@@ -123,7 +123,3 @@ make test
 make lint
 make format
 ```
-
-## Documentation
-
-Refer to the `docs/` directory for detailed architecture, setup, and development guides.
