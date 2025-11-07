@@ -6,6 +6,9 @@ Data/ml-1m
 PRD.md
 Plan.md
 .env
+myenv/
+notebooks/.ipynb_checkpoints
+
 
 # Python
 __pycache__/
