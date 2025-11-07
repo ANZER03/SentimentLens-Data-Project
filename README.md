@@ -37,7 +37,7 @@ The project follows a multi-layered data lakehouse architecture, processing data
 
 ## Streamlit App Demo
 
-[![Watch the demo](images/thumbnail.png)](images/demo.mp4)
+[![Watch the video](https://img.youtube.com/vi/DsmbDJrunZM/hqdefault.jpg)](https://youtu.be/DsmbDJrunZM)
 
 
 ---
