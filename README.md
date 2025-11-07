@@ -33,7 +33,7 @@ The project follows a multi-layered data lakehouse architecture, processing data
 6.  **Analytics and Visualization**:
     *   **Trino**: A high-performance, distributed SQL query engine used to query data directly from the Iceberg tables for analytics.
     *   **Streamlit**: Powers an interactive web application for data visualization and presenting movie recommendations.
-    *   **Keras**: Used to train a recommendation model on the Gold layer data, which is then served via the Streamlit app.
+    *   **Scikit-Learn**: Used to train a recommendation model on the Gold layer data, which is then served via the Streamlit app.
 
 ## Streamlit App Demo
 
