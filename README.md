@@ -109,18 +109,3 @@ project-root/
 ├── Makefile             # Common commands
 └── README.md            # Project documentation
 ```
-
-## Development
-
-### Running Tests
-
-```bash
-make test
-```
-
-### Linting and Formatting
-
-```bash
-make lint
-make format
-```
